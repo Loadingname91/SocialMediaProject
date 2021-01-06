@@ -1,7 +1,7 @@
 from authentication.serializers import RegisterSerializer, ChangePasswordSerializer, UpdateUserSerializer
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import generics
-from authentication.models.models import User
+from authentication.models.user_model import User
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response

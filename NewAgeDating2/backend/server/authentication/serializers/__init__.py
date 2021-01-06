@@ -1,3 +1,3 @@
-from authentication.serializers.serializers import RegisterSerializer
-from authentication.serializers.serializers import ChangePasswordSerializer
-from authentication.serializers.serializers import UpdateUserSerializer
+from authentication.serializers.common_serializers import RegisterSerializer
+from authentication.serializers.common_serializers import ChangePasswordSerializer
+from authentication.serializers.common_serializers import UpdateUserSerializer

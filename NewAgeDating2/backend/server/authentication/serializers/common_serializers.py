@@ -1,7 +1,7 @@
 from authentication.models import User
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
-
+from authentication.utils.email_validation import Email_domain_validator
 
 
 """
@@ -13,13 +13,14 @@ Used to register using the following fields as mentioned below
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
             required=True,
-            validators=[UniqueValidator(queryset=User.objects.all())]
+            validators=[UniqueValidator(queryset=User.objects.all()),Email_domain_validator]
             )
 
     class Meta:
         model = User
-        fields = ('name','username' ,'email' , 'date_of_birth' , 'gender' , 'country' , 'partner_gender' , 'city' ,"is_staff","is_active")
+        fields = ('name','username' ,'email' , 'date_of_birth' , 'gender' , 'country' , 'partner_gender' , 'city' ,"is_staff","is_active",'password')
         extra_kwargs = {'password': {'write_only': True}}
+
 
     def create(self, validated_data):
         user = User.objects.create_user(
@@ -30,11 +31,12 @@ class RegisterSerializer(serializers.ModelSerializer):
             city = validated_data["city"],
             country = validated_data['country'],
             gender = validated_data['gender'],
-            partner_gender = validated_data['partner_gender']
+            partner_gender = validated_data['partner_gender'],
+            password= validated_data['password']
         )
-        user.set_password(validated_data['password'])
         user.save()
         return user
+
 
 
 

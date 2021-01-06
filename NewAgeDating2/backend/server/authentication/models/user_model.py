@@ -9,7 +9,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.auth.base_user import BaseUserManager
 # used for text translation but generally not required unless the end user wants it
 from django.utils.translation import gettext_lazy as _
-
+from authentication.utils import email_validation
 
 """
 UserCreator Class 
@@ -70,3 +70,5 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['name', 'email' , 'date_of_birth' , 'gender' , 'country' , 'partner_gender' , 'city']
+
+    objects = UserCreator()
